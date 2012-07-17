@@ -5,6 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/*
+ * TODO : 
+ * - division entre ScoreManager et FrameManager ?
+ * - garder les scores de frame déja calculés dans la map ? -> éviter de recalculer inutilement
+ * 
+ * A chaque lancer, on vérifie que le score de la frame précédente est dans la map
+ * 
+ * Si oui, on additionne le nouveau lancer (sauf si spare ou strike)
+ * Si pas, on calcul le score de la frame précédente
+ * Comment savoir si la frame précédente était un strike ou un spare ?
+ * 
+ */
 public class FrameManager {
 
 	private static final int MAX_FRAMES = 5;
