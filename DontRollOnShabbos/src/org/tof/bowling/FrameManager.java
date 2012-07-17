@@ -13,66 +13,88 @@ public class FrameManager {
 	private static final int MAX_SKITTLES = 15;
 	
 	
-	private int currentFrame = 0;
-	private int currentThrowInFrame = 0;
-	private int currentThrow = 0;
+	private int currentFrameIdx = 0;
+	private int currentThrowIdxInFrame = 0;
 	
 	private int currentScore = 0;
 	
-//	private Map<Integer,Integer> savedFrameScores = new HashMap<Integer, Integer>();
-//	private List<Integer> skittlesPerThrow = new ArrayList<Integer>(); 
+	//private Map<Integer,Integer> savedFrameScores = new HashMap<Integer, Integer>();
+	private List<Integer> skittlesPerThrow = new ArrayList<Integer>(); 
 	
 	public boolean isFinished() {
-		return currentFrame >= MAX_FRAMES;
+		return currentFrameIdx >= MAX_FRAMES;
 	}
 
 	public int getCurrentFrame() {
-		return currentFrame;
+		return currentFrameIdx;
 	}
 
 	public int getCurrentThrowInFrame() {
-		return currentThrowInFrame;
+		return currentThrowIdxInFrame;
 	}
 	
 	public void lancer(int quilles)
 	{
 		if (quilles < 0 || quilles>MAX_SKITTLES)
 			throw new IllegalArgumentException("Le nombre de quilles doit être entre 0 et "+String.valueOf(MAX_SKITTLES));
-		
-		Integer score = getNewScore(quilles);
+		skittlesPerThrow.add(quilles);
+		Integer score = getNewScore();
 		System.out.println("Score: "+ (score!=null?score:"?"));
 		next();
 		
 	}
 	
+	private int getCurrentThrowIdx()
+	{
+		return skittlesPerThrow.size()-1;
+	}
+	
+	private int getCurrentSkittles()
+	{
+		return skittlesPerThrow.get(getCurrentThrowIdx());
+	}
+	
+	private boolean currentThrowIsStrike()
+	{
+		if (MAX_SKITTLES==getCurrentSkittles()
+				&& currentThrowIdxInFrame==0)
+			return true;
+		return false;
+			
+	}
+	
+	private boolean currentThrowIsSpare()
+	{
+		return false;
+	}
+	
 	private void next()
 	{
-		currentThrowInFrame++;
-		currentThrow++;
-		if (currentFrame>=MAX_FRAMES-1)
+		currentThrowIdxInFrame++;
+		if (currentFrameIdx>=MAX_FRAMES-1)
 		{
-			if (currentThrowInFrame>=MAX_THROWS_FOR_LAST_FRAME)
+			if (currentThrowIdxInFrame>=MAX_THROWS_FOR_LAST_FRAME)
 			{
-				currentThrowInFrame=0;
-				currentFrame++;
+				currentThrowIdxInFrame=0;
+				currentFrameIdx++;
 			}
 		}
 		else
 		{
-			if (currentThrowInFrame>=MAX_THROWS_PER_FRAME)
+			if (currentThrowIdxInFrame>=MAX_THROWS_PER_FRAME)
 			{
-				currentThrowInFrame=0;
-				currentFrame++;
+				currentThrowIdxInFrame=0;
+				currentFrameIdx++;
 			}
 		}
 			
 	}
 	
 
-	Integer getNewScore(int quilles)
+	Integer getNewScore()
 	{
 //		//Ajouter à la liste des quilles par lancer
-//		skittlesPerThrow.add(quilles);
+//		
 //		
 //		//Récupération du score déjà enregistré pour la frame courante
 //		Integer currentFrameScore = savedFrameScores.get(currentFrame);
@@ -85,7 +107,7 @@ public class FrameManager {
 //		else
 //			currentFrameScore = currentFrameScore + quilles;
 			
-		return currentScore+=quilles;
+		return currentScore+=getCurrentSkittles();
 		
 		
 	}
