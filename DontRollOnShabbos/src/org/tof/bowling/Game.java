@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public class Game {
 
-	private FrameManager frameManager = new FrameManager();
+	private GameManager frameManager = new GameManager();
 	
 	public void start() throws IOException
 	{
