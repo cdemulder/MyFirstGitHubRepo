@@ -1,75 +1,59 @@
 package org.tof.bowling;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-
+/*
+ * TODO : 
+ * - exception si somme des lancers dépasse 15
+ * - gestion de la dernière frame
+ * - test unitaires
+ * - refactoring pour meilleure compréhension
+ * - éventuellement singleton pour le ThrowManager
+ */
 public class GameManager {
 
-	private static final int MAX_FRAMES = 5;
-	private static final int MAX_THROWS_PER_FRAME = 3;
-	private static final int MAX_THROWS_FOR_LAST_FRAME = 4;
-	private static final int MAX_SKITTLES = 15;
+	private Frame currentFrame = new Frame();
 	
-
-	private Frame currentFrame = new Frame(null,0);
-	private ThrowManager throwManager = new ThrowManager();
-	private boolean finished=false;
-	
-	public boolean isFinished() {
-		return finished;
+	public boolean isEndOfGame() {
+		return currentFrame.getFrameIdx()==4 && currentFrame.isFinished();
 	}
 
-	public int getCurrentFrame() {
-		return currentFrame.getFrameIdx();
+	public int getCurrentFrameNb() {
+		return currentFrame.getFrameIdx()+1;
 	}
 
-	public int getCurrentThrowInFrame() {
-		return currentFrame.getNextThrowIdxInFrame();
+	public int getCurrentThrowNb() {
+		return currentFrame.getNextThrowIdxInFrame()+1;
 	}
 	
 	public void lancer(int quilles)
 	{
-		if (quilles < 0 || quilles>MAX_SKITTLES)
-			throw new IllegalArgumentException("Le nombre de quilles doit être entre 0 et "+String.valueOf(MAX_SKITTLES));
+		if (quilles < 0 || quilles>15)
+			throw new IllegalArgumentException("Le nombre de quilles doit être entre 0 et 15");
 		
 		Integer score = getScore(quilles);
 		System.out.println("Score: "+ (score!=null?score:"?"));
-		next();
+		prepareNextThrow();
 		
 	}
 	
 	
-	private void next()
+	private void prepareNextThrow()
 	{
-//		currentThrowIdxInFrame++;
-//		if (currentFrameIdx>=MAX_FRAMES-1)
-//		{
-//			if (currentThrowIdxInFrame>=MAX_THROWS_FOR_LAST_FRAME)
-//			{
-//				currentThrowIdxInFrame=0;
-//				currentFrameIdx++;
-//			}
-//		}
-//		else
-//		{
-//			if (currentThrowIdxInFrame>=MAX_THROWS_PER_FRAME)
-//			{
-//				currentThrowIdxInFrame=0;
-//				currentFrameIdx++;
-//			}
-//		}
+		if (!isEndOfGame())
+		{
+			if (currentFrame.isFinished())
+			{
+				currentFrame=new Frame(currentFrame);
+			}	
+		}
 			
 	}
 	
 
-	Integer getScore(int quilles)
+	protected Integer getScore(int throwValue)
 	{
-		throwManager.addThrowValue(quilles);
-		currentFrame.addThrowIdx(throwManager.getLastIdx());
-		return currentFrame.getFrameScore(throwManager);
+		currentFrame.addThrowValue(throwValue);
+		return currentFrame.getScore();
 		
 	}
 

@@ -6,23 +6,23 @@ import java.io.InputStreamReader;
 
 public class Game {
 
-	private GameManager frameManager = new GameManager();
+	private GameManager gameManager = new GameManager();
 	
 	public void start() throws IOException
 	{
 		InputStreamReader istream = new InputStreamReader(System.in) ;
         BufferedReader bufRead = new BufferedReader(istream) ;
         
-		while (!frameManager.isFinished())
+		while (!gameManager.isEndOfGame())
 		{
 			boolean inputOK = false;
 			Integer quilles = null;
 			while (!inputOK)
 			{
 				StringBuilder stringBuilder = new StringBuilder("Frame ");
-				stringBuilder.append(frameManager.getCurrentFrame()+1);
+				stringBuilder.append(gameManager.getCurrentFrameNb());
 				stringBuilder.append(", lancer ");
-				stringBuilder.append(frameManager.getCurrentThrowInFrame()+1);
+				stringBuilder.append(gameManager.getCurrentThrowNb());
 				stringBuilder.append(": ");
 				System.out.println(stringBuilder.toString());
 			
@@ -39,7 +39,7 @@ public class Game {
 					System.out.println("Veuillez entrer un nombre entre 0 et 15 !");
 			}
 			
-			frameManager.lancer(quilles);
+			gameManager.lancer(quilles);
 			
 			
 		}
