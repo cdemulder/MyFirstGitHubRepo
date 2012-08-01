@@ -30,20 +30,20 @@ public class Game {
 				try 
 				{
 					quilles = new Integer(input);
-					if (quilles>=0 && quilles<=15)
-						inputOK = true;
+					gameManager.lancer(quilles);
+					inputOK = true;
 				}
-				catch (NumberFormatException e){}
-				
-				if (!inputOK)
-					System.out.println("Veuillez entrer un nombre entre 0 et 15 !");
+				catch (NumberFormatException e){
+					System.out.println("Veuillez entrer un nombre !");
+				}
+				catch (OutOfBoundsException e){
+					System.out.printf("Veuillez entrer un nombre entre %d et %d !\n",e.getMinBound(),e.getMaxBound());
+				}
+					
 			}
 			
-			gameManager.lancer(quilles);
-			
-			
 		}
-		System.out.println("Bravo !");
+		System.out.println("Vous avez gagnŽ !");
 		
 	}
 	
