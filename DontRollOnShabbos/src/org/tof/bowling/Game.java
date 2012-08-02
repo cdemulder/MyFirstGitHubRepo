@@ -9,7 +9,7 @@ import org.tof.bowling.model.FrameManager;
 
 /**
  * 
- * Point d'entrée du jeu de Sobchak
+ * Point d'entr√©e du jeu de Sobchak
  * 
  * @author Tof
  * 

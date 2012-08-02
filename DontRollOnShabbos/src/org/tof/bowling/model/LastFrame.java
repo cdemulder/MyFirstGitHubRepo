@@ -11,7 +11,7 @@ import org.tof.bowling.exception.WrongThrowValueException;
  */
 public class LastFrame extends Frame {
 
-	private int additionalThrowsCount=0; //le nombre de lancers suppl�mentaires suite � un spare ou un strike
+	private int additionalThrowsCount=0; //le nombre de lancers supplémentaires suite à un spare ou un strike
 	
 	public LastFrame(Frame previous) {
 		super(previous);
