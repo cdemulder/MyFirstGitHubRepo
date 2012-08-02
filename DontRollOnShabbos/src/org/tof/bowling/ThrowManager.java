@@ -32,9 +32,9 @@ public class ThrowManager {
 		return allThrowsValue.get(throwIdx);
 	}
 	
-	public Integer getLastIdx()
+	public int getLastIdx()
 	{
-		return allThrowsValue.size()>0?allThrowsValue.size()-1:null;
+		return allThrowsValue.size()>0?allThrowsValue.size()-1:-1;
 	}
 	
 

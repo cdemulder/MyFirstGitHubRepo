@@ -3,9 +3,11 @@ package org.tof.bowling;
 
 /*
  * TODO : 
- * - gestion de la dernière frame
  * - test unitaires
  * - refactoring pour meilleure compréhension
+ * - javadoc + commentaires
+ * - singleton pour ThrowManager ?
+ * - int ou Integer ?
  */
 public class GameManager {
 

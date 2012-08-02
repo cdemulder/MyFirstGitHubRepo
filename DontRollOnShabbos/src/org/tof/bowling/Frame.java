@@ -1,15 +1,14 @@
 package org.tof.bowling;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Frame {
 	
-	private List<Integer> throwsIdx=new ArrayList<Integer>();
-	private Frame previous=null;
+	protected int lastThrowIdx=-1;
+	protected Frame previous=null;
 	private int frameIdx=0;
-	private ThrowManager throwManager=new ThrowManager();
-	private int frameScore = 0;
+	protected ThrowManager throwManager=new ThrowManager();
+	protected int frameScore = 0;
+	protected int throwsCount = 0;
 	
 	public Frame()
 	{
@@ -26,7 +25,7 @@ public class Frame {
 	
 	public int getNextThrowIdxInFrame()
 	{
-		return throwsIdx.size();
+		return throwsCount;
 				
 	}
 	
@@ -37,21 +36,21 @@ public class Frame {
 	
 	public boolean isFinished()
 	{
-		if (throwsIdx.size()==3 || frameScore==15)
+		if (throwsCount==3 || frameScore==15)
 			return true;
 		return false;
 	}
 	
-	private boolean isSpare()
+	protected boolean isSpare()
 	{
-		if (throwsIdx.size()>1 && frameScore==15)
+		if (throwsCount>1 && frameScore==15)
 			return true;
 		return false;
 	}
 	
-	private boolean isStrike()
+	protected boolean isStrike()
 	{
-		if (throwsIdx.size()==1 && frameScore==15)
+		if (throwsCount==1 && frameScore==15)
 			return true;
 		return false;
 	}
@@ -64,14 +63,14 @@ public class Frame {
 		
 		if (isSpare())
 		{
-			Integer nextThrowsValue = throwManager.getNextThrowsValue(throwsIdx.get(throwsIdx.size()-1), 2);
+			Integer nextThrowsValue = throwManager.getNextThrowsValue(lastThrowIdx, 2);
 			
 			if (nextThrowsValue!=null && previousScore!=null)
 				score=previousScore + frameScore + nextThrowsValue;
 		}
 		else if (isStrike())
 		{
-			Integer nextThrowsValue = throwManager.getNextThrowsValue(throwsIdx.get(throwsIdx.size()-1), 3);
+			Integer nextThrowsValue = throwManager.getNextThrowsValue(lastThrowIdx, 3);
 			if (nextThrowsValue!=null && previousScore!=null)
 				score=previousScore + frameScore + nextThrowsValue;
 		}
@@ -95,12 +94,16 @@ public class Frame {
 	
 	protected void addThrowValue(int throwValue) throws OutOfBoundsException
 	{
-		if (frameScore+throwValue>15)
+		if (isFinished())
+			throw new IllegalStateException("La frame est terminŽe");
+		
+		if (frameScore+throwValue>15 || throwValue<0)
 			throw new OutOfBoundsException(0, 15-frameScore);
 		
 		frameScore +=throwValue;
 		throwManager.addThrowValue(throwValue);
-		throwsIdx.add(throwManager.getLastIdx());
+		throwsCount++;
+		lastThrowIdx=throwManager.getLastIdx();
 	}
 
 }
