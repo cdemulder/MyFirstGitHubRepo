@@ -3,9 +3,9 @@ package org.tof.bowling.model;
 import org.tof.bowling.exception.WrongThrowValueException;
 
 /**
- * ReprŽsente une frame d'une partie de Sobchak
+ * ReprÃ©sente une frame d'une partie de Sobchak
  * 
- * Une frame garde une rŽfŽrence vers la frame prŽcŽdente
+ * Une frame garde une rÃ©fÃ©rence vers la frame prÃ©cÃ©dente
  * et vers un ThrowManager
  * 
  * @author Tof
@@ -22,8 +22,8 @@ public class Frame {
 	protected int lastThrowIdx=-1; //l'indice du dernier lancer dans le throwManager
 	
 	/**
-	 * Constructeur par dŽfaut. 
-	 * La frame prŽcŽdente est ˆ null et une nouvelle instance d'un ThrowManager est crŽe.
+	 * Constructeur par dÃ©faut. 
+	 * La frame prÃ©cÃ©dente est Ã  null et une nouvelle instance d'un ThrowManager est crÃ©e.
 	 * L'indice de la frame est 0
 	 * 
 	 */
@@ -33,9 +33,9 @@ public class Frame {
 	}
 	
 	/**
-	 * Constructeur sur base d'une frame prŽcŽdente.
-	 * La rŽfŽrence vers le ThrowManager de la frame prŽcŽdente est copiŽe.
-	 * L'indice de la frame est l'indice de la frame prŽcŽdente +1
+	 * Constructeur sur base d'une frame prÃ©cÃ©dente.
+	 * La rÃ©fÃ©rence vers le ThrowManager de la frame prÃ©cÃ©dente est copiÃ©e.
+	 * L'indice de la frame est l'indice de la frame prÃ©cÃ©dente +1
 	 * 
 	 * @param previous
 	 */
@@ -66,7 +66,7 @@ public class Frame {
 	}
 	
 	/**
-	 * Renvoie true si la frame est cl™turŽe 
+	 * Renvoie true si la frame est clÃ´turÃ©e 
 	 * (s'il n'y a plus de lancers possibles pour cette frame)
 	 * @return
 	 */
@@ -77,7 +77,7 @@ public class Frame {
 		return false;
 	}
 	/**
-	 * Renvoie true si un spare a ŽtŽ effectuŽ dans cette frame
+	 * Renvoie true si un spare a Ã©tÃ© effectuÃ© dans cette frame
 	 * @return
 	 */
 	protected boolean isSpare()
@@ -88,7 +88,7 @@ public class Frame {
 	}
 	
 	/**
-	 * Renvoie true si un strike a ŽtŽ effectuŽ pour cette frame
+	 * Renvoie true si un strike a Ã©tÃ© effectuÃ© pour cette frame
 	 * @return
 	 */
 	protected boolean isStrike()
@@ -102,20 +102,20 @@ public class Frame {
 	 * Retourne le score actuel du jeu pour cette frame
 	 * 
 	 * Pour calculer le score actuel du jeu pour cette frame, 
-	 * - on rŽcupre le score de la frame prŽcŽdente (->rŽcursivitŽ)
+	 * - on rÃ©cupÃ¨re le score de la frame prÃ©cÃ©dente (->rÃ©cursivitÃ©)
 	 * - s'il existe: 
 	 *		- s'il y a un spare pour la frame courante, 
-	 *			- on tente de rŽcupŽrer la valeur des 2 lancers suivants via le ThrowManager
-	 *			- si elle existe, on retourne cette valeur + le score de la frame courante + le score de la frame prŽcŽdente
+	 *			- on tente de rÃ©cupÃ©rer la valeur des 2 lancers suivants via le ThrowManager
+	 *			- si elle existe, on retourne cette valeur + le score de la frame courante + le score de la frame prÃ©cÃ©dente
 	 *			- sinon, on retourne null
 	 *  	- s'il y a un strike pour la frame courante,
-	 *  		- on tente de rŽcupŽrer la valeur des 3 lancers suivants via le ThrowManager
-	 *  		- si elle existe, on retourne cette valeur + le score de la frame courante + le score de la frame prŽcŽdente
+	 *  		- on tente de rÃ©cupÃ©rer la valeur des 3 lancers suivants via le ThrowManager
+	 *  		- si elle existe, on retourne cette valeur + le score de la frame courante + le score de la frame prÃ©cÃ©dente
 	 *  		- sinon, on retourne null
-	 *  	- sinon, on retourne le score de la frame courante + le score de la frame prŽcŽdente
+	 *  	- sinon, on retourne le score de la frame courante + le score de la frame prÃ©cÃ©dente
 	 * - sinon, on retourne null
 	 * 
-	 * @return null si le score ne peut pas encore tre calculŽ
+	 * @return null si le score ne peut pas encore Ãªtre calculÃ©
 	 */
 	protected Integer getScore()
 	{
@@ -149,7 +149,7 @@ public class Frame {
 	}
 	
 	/**
-	 * Retourne le nouveau score du jeu pour cette frame aprs prise en compte 
+	 * Retourne le nouveau score du jeu pour cette frame aprÃ¨s prise en compte 
 	 * de la valeur du nouveau lancer
 	 * 
 	 * @param throwValue : valeur du lancer
@@ -171,7 +171,7 @@ public class Frame {
 	protected void addThrowValue(int throwValue) throws WrongThrowValueException
 	{
 		if (isClosed())
-			throw new IllegalStateException("La frame est terminŽe");
+			throw new IllegalStateException("La frame est terminÃ©e");
 		
 		if (frameScore+throwValue>15 || throwValue<0)
 			throw new WrongThrowValueException(0, 15-frameScore);

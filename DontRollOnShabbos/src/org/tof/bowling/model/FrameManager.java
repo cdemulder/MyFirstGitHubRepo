@@ -5,7 +5,7 @@ import org.tof.bowling.exception.WrongThrowValueException;
 
 /**
  * Responsable de la gestion d'une partie de Sobchak
- * Référence la frame courante
+ * R√©f√©rence la frame courante
  * 
  * @author Tof
  *
@@ -15,7 +15,7 @@ public class FrameManager {
 	private Frame currentFrame = new Frame();
 	
 	/**
-	 * Retourne true si la partie est terminée 
+	 * Retourne true si la partie est termin√©e 
 	 * 
 	 * @return
 	 */
@@ -24,7 +24,7 @@ public class FrameManager {
 	}
 
 	/**
-	 * Retourne le numéro de la frame courante (pour affichage) 
+	 * Retourne le num√©ro de la frame courante (pour affichage) 
 	 * @return
 	 */
 	public int getCurrentFrameNb() {
@@ -32,7 +32,7 @@ public class FrameManager {
 	}
 
 	/**
-	 * Retourne le numéro du lancer suivant (pour affichage)
+	 * Retourne le num√©ro du lancer suivant (pour affichage)
 	 * @return
 	 */
 	public int getCurrentThrowNb() {
@@ -40,16 +40,16 @@ public class FrameManager {
 	}
 	
 	/**
-	 * Renvoie le résultat du lancer suivant pour ce joueur
+	 * Renvoie le r√©sultat du lancer suivant pour ce joueur
 	 * @param quilles donne le nombre de quilles abattues par ce lancer
-	 * @return le score de la partie après ce lancer. 
-	 * 		   null si le score ne peut pas encore être calculé (strike ou spare)
+	 * @return le score de la partie apr√®s ce lancer. 
+	 * 		   null si le score ne peut pas encore √™tre calcul√© (strike ou spare)
 	 * @throws WrongThrowValueException si la valeur est en dehors des limites possibles
 	 */
 	public Integer lancer(int quilles) throws WrongThrowValueException
 	{
 		if (isEndOfGame())
-			throw new IllegalStateException("Le jeu est terminé");
+			throw new IllegalStateException("Le jeu est termin√©");
 		
 		Integer score = currentFrame.getNewScore(quilles);
 		
@@ -60,8 +60,8 @@ public class FrameManager {
 	}
 	
 	/*
-	 * Prépare les frames pour le lancer suivant.
-	 * Si la frame courante est clôturée, on crée un nouvelle frame sur base de la frame courante
+	 * Pr√©pare les frames pour le lancer suivant.
+	 * Si la frame courante est cl√¥tur√©e, on cr√©e un nouvelle frame sur base de la frame courante
 	 * 
 	 */
 	private void prepareNextThrow()

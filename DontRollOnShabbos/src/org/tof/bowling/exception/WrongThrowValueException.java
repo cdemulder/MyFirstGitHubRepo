@@ -1,7 +1,7 @@
 package org.tof.bowling.exception;
 
 /**
- * Exception utilisée en cas de valeur imposible pour les lancers
+ * Exception utilis√©e en cas de valeur imposible pour les lancers
  * 
  * @author Tof
  *

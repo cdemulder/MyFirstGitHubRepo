@@ -3,15 +3,15 @@ package org.tof.bowling.model;
 import org.tof.bowling.exception.WrongThrowValueException;
 
 /**
- * ImplŽmentation particulire pour la dernire frame :
- * Lancers additionnels possibles pour complter un strike ou un spare
+ * ImplÃ©mentation particuliÃ¨re pour la derniÃ¨re frame :
+ * Lancers additionnels possibles pour complÃ¨ter un strike ou un spare
  * 
  * @author Tof
  *
  */
 public class LastFrame extends Frame {
 
-	private int additionalThrowsCount=0; //le nombre de lancers supplŽmentaires suite ˆ un spare ou un strike
+	private int additionalThrowsCount=0; //le nombre de lancers supplï¿½mentaires suite ï¿½ un spare ou un strike
 	
 	public LastFrame(Frame previous) {
 		super(previous);
@@ -42,16 +42,16 @@ public class LastFrame extends Frame {
 	protected void addThrowValue(int throwValue) throws WrongThrowValueException {
 		
 		if (isClosed())
-			throw new IllegalStateException("La frame est terminŽe");
+			throw new IllegalStateException("La frame est terminÃ©e");
 		
 		if (isStrike() || isSpare())
 		{
 			if (throwValue>15 || throwValue<0)
 				throw new WrongThrowValueException(0, 15);
 			/*
-			 * ici, ce n'est pas nŽcessaire de mettre ˆ jour ni la valeur du lastThrowIdx, ni le frameScore
+			 * ici, ce n'est pas nÃ©cessaire de mettre Ã  jour ni la valeur du lastThrowIdx, ni le frameScore
 			 * Cela permet de garder la fonctionnement de getScore() 
-			 * Les 2 ou 3 lancers additionnels ne sont utiles que dans le ThrowManager (puisque dŽcoule d'un spare ou d'un strike)
+			 * Les 2 ou 3 lancers additionnels ne sont utiles que dans le ThrowManager (puisque dÃ©coule d'un spare ou d'un strike)
 			 */
 			throwManager.addThrowValue(throwValue); 
 			additionalThrowsCount++;

@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Responsable de la gestion des lancers
- * Toutes les valeurs des lancers sont enregistrées dans une liste.
+ * Toutes les valeurs des lancers sont enregistr√©es dans une liste.
  * 
  * @author Tof
  *
@@ -15,13 +15,13 @@ public class ThrowManager {
 	private List<Integer> allThrowsValue = new ArrayList<Integer>();
 	
 	/**
-	 * Renvoie l'addition des valeurs du tableau des nbThrows suivants par rapport à currentIdx
+	 * Renvoie l'addition des valeurs du tableau des nbThrows suivants par rapport √† currentIdx
 	 * Exemple : si le contenu de la liste est {1,2,6,15}, que currentIdx==1 et que nbThrows == 2
 	 * La valeur de retour est : 21 (6+15) 
 	 * 
 	 * @param currentIdx
 	 * @param nbThrows
-	 * @return null si la taille de la liste est <= à currentIdx+nbThrows
+	 * @return null si la taille de la liste est <= √† currentIdx+nbThrows
 	 */
 	public Integer getNextThrowsValue(int currentIdx,int nbThrows)
 	{
@@ -37,7 +37,7 @@ public class ThrowManager {
 	}
 	
 	/** 
-	 * Ajoute une valeur à la liste des lancers et retourne son indice
+	 * Ajoute une valeur √† la liste des lancers et retourne son indice
 	 * 
 	 * @param throwValue
 	 */
@@ -48,9 +48,9 @@ public class ThrowManager {
 	}
 	
 	/**
-	 * Renvoie la valeur d'un lancer pour un indice donné
+	 * Renvoie la valeur d'un lancer pour un indice donn√©
 	 * @param throwIdx
-	 * @return null si la taille de la liste est <= à l'indice donné
+	 * @return null si la taille de la liste est <= √† l'indice donn√©
 	 */
 	public Integer getThrowValue(int throwIdx)
 	{
